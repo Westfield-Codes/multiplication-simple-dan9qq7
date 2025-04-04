@@ -5,30 +5,51 @@
  */
 
 
-/* main controls the program. Calling askQuestions() provides feedback depending on the 
- * number right returned: Either "Perfect!" or it says how many right out of the number asked. 
- * Store the number of questions to ask in a variable called questions.
+
+/* main controls the program. Calling askquestions() it provides feedback depending on the 
+ * number wrong returned: 0 = "Perfect!" otherwise it says how many right out of the number asked.
+ * set the number of questions as the variable questions.
  * @param none
  * @return none
  */
 function main() {
+let questions = 5;
+askquestions(questions);
 
 }
 
-/* askQuestions calls askQuestion() question number if times, sending the question number as an argument. 
- * It counts the number right returned, and return number right to main().
+/* askFive calls askQuestion() question times, sending the question number as an argument. 
+ * It counts number wrong returned, and return number wrong to main().
  * @param: none
- * @return: {integer} score (0-questions)
+ * @return: score (0-questions)
  */
-function askQuestions() {
-
+function askquestions(questions) {
+let right = 0;
+for  (question = 1; question <= questions; question++) {
+    right += askQuestion(question);
+    alert("you answered " + right + " questions correctly")
+}
+alert("you got " + right + " out of " + questions + " correct.");
+return false;
 }
 
-/* askQuestion asks a multiplication question, using the question parameter to say which
- * question is being asked.  It returns 1 if correct, 0 if incorrect.
- * @param: {integer} question 
- * @return: {integer} (0 or 1) or {boolean}
+/* askQuestion asks a multiplication question, using the quesiton parameter to say which
+ * question is being asked.  It returns 0 if incorrect, 1 if correct.
+ * @param: question (integer 1-5)
+ * @return: integer (0 or 1)
  */
 function askQuestion(question){
-  
+  let a = Math.floor(Math.random()*(9-3)+1)+1
+  let b = Math.floor(Math.random()*(9-3)+1)+1
+  let product = a*b
+let equation = "question" + question + ": " + a + " * "+ b + " =?";
+let answer = prompt(equation)
+if (answer == product) {
+  alert("correct!");
+      return true;
+    }
+    else{ 
+      alert("incorrect!");
+      return false;
+}
 }
